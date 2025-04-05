@@ -200,7 +200,6 @@ function renderMainGame(game) {
     listItem.innerHTML = `
         <p><strong>Game Date:</strong> ${formatDate(game.gameDate)}</p>
         <p><strong>Teams:</strong> ${game.away} @ ${game.home}</p>
-        <p><strong>Status:</strong> ${game.gameStatus}</p>
         <p><strong>Game Time:</strong> ${game.gameTime}</p>
         ${game.odds ? `<p><strong>Odds:</strong> ${game.odds}</p>` : ''}
         ${game.odds ? `<p><strong>1 Unit Winnings:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
