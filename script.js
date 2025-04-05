@@ -198,6 +198,11 @@ function renderGameCard(game) {
 
 function renderMainGame(game) {
     const listItem = document.createElement('li');
+
+    let cardStyle = '';
+    let textColor = 'white'; // Default text color
+
+
     listItem.innerHTML = `
         <p><strong>Game Date:</strong> ${formatDate(game.gameDate)}</p>
         <p><strong>Teams:</strong> ${game.away} @ ${game.home}</p>
@@ -210,13 +215,21 @@ function renderMainGame(game) {
     if (game.betStatus === 'Win' && game.odds && wagerInput.style.display === 'block' && currentWager !== null) {
         listItem.innerHTML += `<p><strong>Gain:</strong> $${calculateWinnings(game.odds, currentWager)}</p>`;
         updateTotalStats(true, parseFloat(calculateWinnings(game.odds, 1)), parseFloat(calculateWinnings(game.odds, currentWager)));
+        cardStyle = 'background-color: #a8e0a8; border: 1px solid #7ac27a; color: black;';
+        textColor = 'black';
     } else if (game.betStatus === 'Loss' && game.odds && wagerInput.style.display === 'block' && currentWager !== null) {
         listItem.innerHTML += `<p><strong>Loss:</strong> $${currentWager}</p>`;
         updateTotalStats(false, 1, currentWager);
+        cardStyle = 'background-color: #e8a8a8; border: 1px solid #d08080; color: black;';
+        textColor = 'black';
     } else if (game.betStatus === 'Win' && game.odds && currentWager === null){
         updateTotalStats(true, parseFloat(calculateWinnings(game.odds, 1)), 0);
+        cardStyle = 'background-color: #a8e0a8; border: 1px solid #7ac27a; color: black;';
+        textColor = 'black';
     } else if (game.betStatus === 'Loss' && game.odds && currentWager === null) {
         updateTotalStats(false, 1, 0);
+        cardStyle = 'background-color: #e8a8a8; border: 1px solid #d08080; color: black;';
+        textColor = 'black';
     }
     if (wagerInput.style.display === 'block' && currentWager !== null && game.odds && game.betStatus !== 'Win' && game.betStatus !== 'Loss') {
         listItem.innerHTML += `
@@ -224,6 +237,9 @@ function renderMainGame(game) {
             <p><strong>Potential Winnings:</strong> $${calculateWinnings(game.odds, currentWager)}</p>
         `;
     }
+
+    listItem.setAttribute('style', cardStyle);
+
     return listItem;
 }
 
