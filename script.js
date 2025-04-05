@@ -184,6 +184,7 @@ function renderGameCard(game) {
     card.innerHTML = `
         <p style="color: ${textColor};"><strong>Date:</strong> ${formatDate(game.gameDate)}</p>
         <p style="color: ${textColor};"><strong>Teams:</strong> ${game.away} @ ${game.home}</p>
+        ${game.score ? `<p style="color: ${textColor};"><strong>Score:</strong> ${game.score}</p>` : ''}        
         ${game.odds ? `<p style="color: ${textColor};"><strong>Odds:</strong> ${game.odds}</p>` : ''}
         ${game.odds ? `<p style="color: ${textColor};"><strong>1 Unit Winnings:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
         ${game.betStatus ? `<p style="color: ${textColor};"><strong>Bet Status:</strong> ${game.betStatus}</p>` : ''}
