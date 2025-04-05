@@ -92,7 +92,7 @@ li p {
     padding: 15px;
     border-bottom: 2px solid #333; /* Darker border */
     z-index: 100;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 16px;
     color: #ddd; /* Lighter text color */
     border-radius: 8px;
@@ -107,11 +107,11 @@ li p {
 }
 
 #totalStats #totalWinsStat {
-    color: #a8e0a8; /* Green for wins */
+    color: #008000; /* Green for wins */
 }
 
 #totalStats #totalLossesStat {
-    color: #e8a8a8; /* Red for losses */
+    color: #ff0000; /* Red for losses */
 }
 
 #totalStats #totalUnitsStat {
