@@ -189,7 +189,7 @@ export const schedule = [
       "gameStatusCode": "0",
       "odds": "-230",
       "score": "",
-      "betStatus": "Open"
+      "betStatus": "Win"
    },
    {
       "gameID": "20250406_CHW@DET",
