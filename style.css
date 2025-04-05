@@ -1,0 +1,179 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #1f1f1f;
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 300px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+li p {
+    margin: 5px 0;
+}
+
+.dropdown-button {
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+    width: 300px;
+}
+
+.dropdown-list {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: #1f1f1f;
+    position: relative;
+    z-index: 1;
+    width: 300px;
+    max-height: 300px; /* Limit height and add scroll */
+    overflow-y: auto;
+}
+
+.dropdown-list .game-card { /* Style game cards in dropdown */
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #2a2a2a;
+    text-align: left;
+    color: white; /* Default text color in dropdown cards */
+}
+
+.dropdown-list .game-card:last-child {
+    border-bottom: none;
+}
+
+.dropdown-list .game-card:hover {
+    background-color: #2a2a2a;
+}
+
+.load-more {
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    width: 300px;
+    margin-top: 5px;
+}
+.game-card{
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+/* Styles for total stats */
+#totalStats {
+    position: sticky;
+    top: 0;
+    background-color: #1f1f1f; /* Darker background */
+    padding: 15px;
+    border-bottom: 2px solid #333; /* Darker border */
+    z-index: 100;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 16px;
+    color: #ddd; /* Lighter text color */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#totalStats span {
+    font-weight: bold;
+}
+
+#totalStats #totalWinsStat {
+    color: #a8e0a8; /* Green for wins */
+}
+
+#totalStats #totalLossesStat {
+    color: #e8a8a8; /* Red for losses */
+}
+
+#totalStats #totalUnitsStat {
+    color: #ffa500; /* Orange for units */
+}
+
+#totalStats #totalWinningsStat {
+    color: #4682b4; /* Steel blue for winnings */
+}
+
+/* Styles for wager input */
+#wagerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#wagerLabel {
+    margin-right: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #ddd;
+}
+
+#wagerInput {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    background-color: #333;
+    color: #ddd;
+}
+
+#addWagerButton, #hideWagerButton {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin: 5px auto 10px auto;
+}
+
+#addWagerButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#addWagerButton:hover {
+    background-color: #45a049;
+}
+
+#hideWagerButton {
+    background-color: #ccc;
+    color: black;
+}
+
+#hideWagerButton:hover {
+    background-color: #bbb;
+}
