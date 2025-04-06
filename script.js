@@ -110,7 +110,7 @@ totalStats.innerHTML = `
         <span style="color: #ffa500; font-weight: bold;">Units: <span id="totalUnitsStat">0.00</span></span>
     </div>
     <div style="text-align: center; display: none;" id="totalWinningsContainer">
-        <span style="color: #4682b4; font-weight: bold;">Winnings: $<span id="totalWinningsStat">0.00</span></span>
+        <span style="color: #4682b4; font-weight: bold;">Winnings: <span id="totalWinningsStat">0.00</span></span>
     </div>
 `;
 
@@ -137,8 +137,8 @@ function updateTotalStats(win, units, winnings) {
     }
     document.getElementById('totalWinsStat').textContent = totalWins;
     document.getElementById('totalLossesStat').textContent = totalLosses;
-    document.getElementById('totalUnitsStat').textContent = totalUnits.toFixed(2);
-    document.getElementById('totalWinningsStat').textContent = totalWinnings.toFixed(2);
+    document.getElementById('totalUnitsStat').textContent = (totalUnits >= 0 ? '+' : '') + totalUnits.toFixed(2);
+    document.getElementById('totalWinningsStat').textContent = (totalWinnings >= 0 ? '+' : '') + '$' + Math.abs(totalWinnings).toFixed(2);
     if (currentWager !== null) {
         document.getElementById('totalWinningsContainer').style.display = 'block';
     } else {
