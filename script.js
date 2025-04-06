@@ -65,11 +65,11 @@ hideWagerButton.addEventListener('mouseout', () => {
 });
 
 addWagerButton.addEventListener('mouseover', () => {
-  addWagerButton.style.backgroundColor = '#45a049';
+    addWagerButton.style.backgroundColor = '#45a049';
 });
 
 addWagerButton.addEventListener('mouseout', () => {
-  addWagerButton.style.backgroundColor = '#4CAF50';
+    addWagerButton.style.backgroundColor = '#4CAF50';
 });
 
 wagerContainer.appendChild(wagerLabel);
@@ -125,24 +125,24 @@ function updateTotalStats(win, units, winnings) {
     if (win) {
         totalWins++;
         totalUnits += units;
-        if(currentWager !== null){
-          totalWinnings += winnings;
+        if (currentWager !== null) {
+            totalWinnings += winnings;
         }
     } else {
         totalLosses++;
         totalUnits -= 1;
-        if(currentWager !== null){
-          totalWinnings -= currentWager || 0;
+        if (currentWager !== null) {
+            totalWinnings -= currentWager || 0;
         }
     }
     document.getElementById('totalWinsStat').textContent = totalWins;
     document.getElementById('totalLossesStat').textContent = totalLosses;
     document.getElementById('totalUnitsStat').textContent = totalUnits.toFixed(2);
     document.getElementById('totalWinningsStat').textContent = totalWinnings.toFixed(2);
-    if(currentWager !== null){
-      document.getElementById('totalWinningsContainer').style.display = 'block';
-    }else{
-      document.getElementById('totalWinningsContainer').style.display = 'none';
+    if (currentWager !== null) {
+        document.getElementById('totalWinningsContainer').style.display = 'block';
+    } else {
+        document.getElementById('totalWinningsContainer').style.display = 'none';
     }
 }
 
@@ -184,7 +184,7 @@ function renderGameCard(game) {
     card.innerHTML = `
         <p style="color: ${textColor};"><strong>Date:</strong> ${formatDate(game.gameDate)}</p>
         <p style="color: ${textColor};"><strong>Teams:</strong> ${game.away} @ ${game.home}</p>
-        ${game.score ? `<p style="color: ${textColor};"><strong>Score:</strong> ${game.score}</p>` : ''}        
+        ${game.score ? `<p style="color: ${textColor};"><strong>Score:</strong> ${game.score}</p>` : ''}
         ${game.odds ? `<p style="color: ${textColor};"><strong>Odds:</strong> ${game.odds}</p>` : ''}
         ${game.odds ? `<p style="color: ${textColor};"><strong>1 Unit Winnings:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
         ${game.betStatus ? `<p style="color: ${textColor};"><strong>Bet Status:</strong> ${game.betStatus}</p>` : ''}
@@ -198,10 +198,8 @@ function renderGameCard(game) {
 
 function renderMainGame(game) {
     const listItem = document.createElement('li');
-
     let cardStyle = '';
-    let textColor = 'white'; // Default text color
-
+    let textColor = 'white';
 
     listItem.innerHTML = `
         <p><strong>Game Date:</strong> ${formatDate(game.gameDate)}</p>
@@ -212,34 +210,32 @@ function renderMainGame(game) {
         ${game.score ? `<p><strong>Score:</strong> ${game.score}</p>` : ''}
         ${game.betStatus ? `<p><strong>Bet Status:</strong> ${game.betStatus}</p>` : ''}
     `;
-    if (game.betStatus === 'Win' && game.odds && wagerInput.style.display === 'block' && currentWager !== null) {
+
+    if (game.betStatus === 'Win' && game.odds && currentWager !== null) {
         listItem.innerHTML += `<p><strong>Gain:</strong> $${calculateWinnings(game.odds, currentWager)}</p>`;
-        updateTotalStats(true, parseFloat(calculateWinnings(game.odds, 1)), parseFloat(calculateWinnings(game.odds, currentWager)));
         cardStyle = 'background-color: #a8e0a8; border: 1px solid #7ac27a; color: black;';
         textColor = 'black';
-    } else if (game.betStatus === 'Loss' && game.odds && wagerInput.style.display === 'block' && currentWager !== null) {
+    } else if (game.betStatus === 'Loss' && game.odds && currentWager !== null) {
         listItem.innerHTML += `<p><strong>Loss:</strong> $${currentWager}</p>`;
-        updateTotalStats(false, 1, currentWager);
         cardStyle = 'background-color: #e8a8a8; border: 1px solid #d08080; color: black;';
         textColor = 'black';
-    } else if (game.betStatus === 'Win' && game.odds && currentWager === null){
-        updateTotalStats(true, parseFloat(calculateWinnings(game.odds, 1)), 0);
+    } else if (game.betStatus === 'Win' && game.odds && currentWager === null) {
         cardStyle = 'background-color: #a8e0a8; border: 1px solid #7ac27a; color: black;';
         textColor = 'black';
     } else if (game.betStatus === 'Loss' && game.odds && currentWager === null) {
-        updateTotalStats(false, 1, 0);
         cardStyle = 'background-color: #e8a8a8; border: 1px solid #d08080; color: black;';
         textColor = 'black';
     }
-    if (wagerInput.style.display === 'block' && currentWager !== null && game.odds && game.betStatus !== 'Win' && game.betStatus !== 'Loss') {
+
+    if (currentWager !== null && game.odds && game.betStatus !== 'Win' && game.betStatus !== 'Loss') {
         listItem.innerHTML += `
             <p><strong>Wager:</strong> $${currentWager}</p>
             <p><strong>Potential Winnings:</strong> $${calculateWinnings(game.odds, currentWager)}</p>
         `;
     }
 
-    listItem.setAttribute('style', cardStyle);
-
+    listItem.setAttribute('style', cardStyle); // Apply the style here!
+    listItem.style.color = textColor; // Apply text color
     return listItem;
 }
 
@@ -302,19 +298,28 @@ function createDropdown(label, gamesFunction, id) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function recalculateStats() {
+    totalWins = 0;
+    totalLosses = 0;
+    totalUnits = 0;
+    totalWinnings = 0;
     schedule.forEach(game => {
         if (game.betStatus === 'Win' && game.odds) {
-            updateTotalStats(true, parseFloat(calculateWinnings(game.odds, 1)), 0);
+            updateTotalStats(true, parseFloat(calculateWinnings(game.odds, 1)), currentWager ? parseFloat(calculateWinnings(game.odds, currentWager)) : 0);
         } else if (game.betStatus === 'Loss' && game.odds) {
-            updateTotalStats(false, 1, 0);
+            updateTotalStats(false, 1, currentWager ? currentWager : 0);
         }
     });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    recalculateStats();
 
     const currentGame = findCurrentOrNextGame();
     if (currentGame) gameList.appendChild(renderMainGame(currentGame));
     createDropdown('Past Games', getPastGames, 'pastGamesList');
     createDropdown('Future Games', getFutureGames, 'futureGamesList');
+
     addWagerButton.addEventListener('click', () => {
         wagerLabel.style.display = 'block';
         wagerInput.style.display = 'block';
@@ -331,50 +336,13 @@ document.addEventListener('DOMContentLoaded', () => {
         wagerInput.value = '';
         gameList.innerHTML = '';
         gameList.appendChild(renderMainGame(findCurrentOrNextGame()));
-        totalWins = 0;
-        totalLosses = 0;
-        totalUnits = 0;
-        totalWinnings = 0;
-        schedule.forEach(game => {
-            if (game.betStatus === 'Win' && game.odds) {
-                updateTotalStats(true, parseFloat(calculateWinnings(game.odds, 1)), 0);
-            } else if (game.betStatus === 'Loss' && game.odds) {
-                updateTotalStats(false, 1, 0);
-            }
-        });
+        recalculateStats();
     });
 
     wagerInput.addEventListener('input', () => {
-        if (wagerInput.value) {
-            currentWager = parseFloat(wagerInput.value);
-            gameList.innerHTML = '';
-            gameList.appendChild(renderMainGame(findCurrentOrNextGame()));
-            totalWins = 0;
-            totalLosses = 0;
-            totalUnits = 0;
-            totalWinnings = 0;
-            schedule.forEach(game => {
-                if (game.betStatus === 'Win' && game.odds) {
-                    updateTotalStats(true, parseFloat(calculateWinnings(game.odds, 1)), parseFloat(calculateWinnings(game.odds, currentWager)));
-                } else if (game.betStatus === 'Loss' && game.odds) {
-                    updateTotalStats(false, 1, currentWager);
-                }
-            });
-        } else {
-            currentWager = null;
-            gameList.innerHTML = '';
-            gameList.appendChild(renderMainGame(findCurrentOrNextGame()));
-            totalWins = 0;
-            totalLosses = 0;
-            totalUnits = 0;
-            totalWinnings = 0;
-            schedule.forEach(game => {
-                if (game.betStatus === 'Win' && game.odds) {
-                    updateTotalStats(true, parseFloat(calculateWinnings(game.odds, 1)), 0);
-                } else if (game.betStatus === 'Loss' && game.odds) {
-                    updateTotalStats(false, 1, 0);
-                }
-            });
-        }
+        currentWager = wagerInput.value ? parseFloat(wagerInput.value) : null;
+        gameList.innerHTML = '';
+        gameList.appendChild(renderMainGame(findCurrentOrNextGame()));
+        recalculateStats();
     });
 });
