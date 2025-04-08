@@ -259,9 +259,9 @@ export const schedule = [
       },
       "home": "CLE",
       "gameStatusCode": "0",
-      "odds": "",
+      "odds": "-190",
       "score": "",
-      "betStatus": ""
+      "betStatus": "Open"
    },
    {
       "gameID": "20250410_CHW@CLE",
