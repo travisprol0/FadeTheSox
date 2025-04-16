@@ -30,6 +30,10 @@ li p {
     margin: 5px 0;
 }
 
+.dropdown-container {
+    /* Added for potential overall dropdown styling */
+}
+
 .dropdown-button {
     background-color: #333;
     color: white;
@@ -53,12 +57,88 @@ li p {
     overflow-y: auto;
 }
 
-.dropdown-list .game-card { /* Style game cards in dropdown */
-    padding: 8px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #2a2a2a;
+.dropdown-list .game-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px; /* Reduced margin for a tighter look */
+    padding: 8px 12px; /* Slightly reduced padding */
+    border-radius: 3px; /* More subtle rounded corners */
+    background-color: #222; /* Darker background */
+    color: #eee; /* Light text */
+    font-size: 0.9em; /* Slightly smaller font size */
+    border-bottom: 1px solid #333;
+}
+
+.dropdown-list .game-card.win {
+    background-color: #4CAF50; /* Green for win */
+    color: #fff;
+}
+
+.dropdown-list .game-card.loss {
+    background-color: #f44336; /* Red for loss */
+    color: #fff;
+}
+
+.dropdown-list .game-card.future {
+    background-color: #337ab7; /* Blue for future */
+    color: #fff;
+}
+
+.dropdown-list .game-card .game-info {
     text-align: left;
-    color: white; /* Default text color in dropdown cards */
+}
+
+.dropdown-list .game-card .bet-info {
+    text-align: right;
+}
+
+.dropdown-list .game-card .teams {
+    font-weight: bold;
+}
+
+.dropdown-list .game-card .score-display {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 2px 0;
+}
+
+.dropdown-list .game-card .away-team {
+    /* Keeping default light color */
+}
+
+.dropdown-list .game-card .home-team {
+    /* Keeping default light color */
+}
+
+.dropdown-list .game-card .away-score {
+    color: #fff;
+}
+
+.dropdown-list .game-card .home-score {
+    color: #fff;
+}
+
+.dropdown-list .game-card .bet-status.win {
+    color: #fff;
+}
+
+.dropdown-list .game-card .bet-status.loss {
+    color: #fff;
+}
+
+.dropdown-list .game-card .date,
+.dropdown-list .game-card .score,
+.dropdown-list .game-card .time,
+.dropdown-list .game-card .odds,
+.dropdown-list .game-card .unit-winnings {
+    font-size: 0.8em; /* Even smaller for less emphasis */
+    margin: 1px 0;
+}
+
+.dropdown-list .game-card .bet-status {
+    font-weight: bold;
+    margin: 2px 0;
 }
 
 .dropdown-list .game-card:last-child {
@@ -66,7 +146,7 @@ li p {
 }
 
 .dropdown-list .game-card:hover {
-    background-color: #2a2a2a;
+    background-color: #333;
 }
 
 .load-more {
@@ -78,10 +158,97 @@ li p {
     width: 300px;
     margin-top: 5px;
 }
-.game-card{
-  border-radius: 5px;
-  padding: 10px;
-  margin: 5px 0;
+
+.scoreboard-main-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+    padding: 12px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #333; /* Slightly lighter than dropdown */
+    color: #eee;
+    text-align: center; /* Center align in main card */
+}
+
+.scoreboard-main-card.win {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.scoreboard-main-card.loss {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.scoreboard-main-card.future {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.scoreboard-main-card .game-info {
+    margin-bottom: 8px;
+}
+
+.scoreboard-main-card .teams {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.scoreboard-main-card .score-display {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.scoreboard-main-card .away-team {
+    /* Keeping default light color */
+}
+
+.scoreboard-main-card .home-team {
+    /* Keeping default light color */
+}
+
+.scoreboard-main-card .away-score {
+    color: #fff;
+}
+
+.scoreboard-main-card .home-score {
+    color: #fff;
+}
+
+.scoreboard-main-card .bet-info {
+    margin-top: 8px;
+}
+
+.scoreboard-main-card .bet-status.win {
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.scoreboard-main-card .bet-status.loss {
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.scoreboard-main-card .gain {
+    color: #66bb6a; /* Lighter green */
+}
+
+.scoreboard-main-card .loss {
+    color: #ef5350; /* Lighter red */
+}
+
+.scoreboard-main-card .potential {
+    /* Removed the color property, will use default */
+}
+
+.scoreboard-main-card p {
+    margin: 3px 0;
+    font-size: 0.9em;
 }
 
 /* Styles for total stats */
@@ -102,23 +269,27 @@ li p {
     align-items: center;
 }
 
-#totalStats span {
+#totalStats .stat-item {
+    text-align: center;
+}
+
+#totalStats .stat-label {
     font-weight: bold;
 }
 
-#totalStats #totalWinsStat {
+#totalStats .wins {
     color: #008000; /* Green for wins */
 }
 
-#totalStats #totalLossesStat {
+#totalStats .losses {
     color: #ff0000; /* Red for losses */
 }
 
-#totalStats #totalUnitsStat {
+#totalStats .units {
     color: #ffa500; /* Orange for units */
 }
 
-#totalStats #totalWinningsStat {
+#totalStats .winnings {
     color: #4682b4; /* Steel blue for winnings */
 }
 
@@ -149,7 +320,7 @@ li p {
     color: #ddd;
 }
 
-#addWagerButton, #hideWagerButton {
+.wager-button {
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -160,20 +331,24 @@ li p {
     margin: 5px auto 10px auto;
 }
 
-#addWagerButton {
+.add-wager-button {
     background-color: #4CAF50;
     color: white;
 }
 
-#addWagerButton:hover {
+.add-wager-button:hover {
     background-color: #45a049;
 }
 
-#hideWagerButton {
+.hide-wager-button {
     background-color: #ccc;
     color: black;
 }
 
-#hideWagerButton:hover {
+.hide-wager-button:hover {
     background-color: #bbb;
+}
+
+.hover {
+    /* Class for hover effects (applied in JS) */
 }

@@ -4,72 +4,48 @@ const gameList = document.getElementById('gameList');
 
 // Wager input and button (initially hidden)
 const wagerContainer = document.createElement('div');
-wagerContainer.style.display = 'flex';
-wagerContainer.style.alignItems = 'center';
-wagerContainer.style.justifyContent = 'center';
+wagerContainer.id = 'wagerContainer';
+wagerContainer.classList.add('wager-container');
 
 const wagerLabel = document.createElement('label');
+wagerLabel.id = 'wagerLabel';
 wagerLabel.textContent = 'Custom Wager Amount: ';
+wagerLabel.classList.add('wager-label');
 wagerLabel.style.display = 'none';
-wagerLabel.style.marginRight = '5px';
-wagerLabel.style.fontFamily = 'Arial, sans-serif';
-wagerLabel.style.fontSize = '16px';
 
 const wagerInput = document.createElement('input');
+wagerInput.id = 'wagerInput';
 wagerInput.type = 'number';
 wagerInput.value = '';
 wagerInput.label = 'wager';
-wagerInput.style.width = '100px';
+wagerInput.classList.add('wager-input');
 wagerInput.style.display = 'none';
-wagerInput.style.padding = '8px';
-wagerInput.style.border = '1px solid #ccc';
-wagerInput.style.borderRadius = '4px';
-wagerInput.style.fontFamily = 'Arial, sans-serif';
-wagerInput.style.fontSize = '16px';
-wagerInput.style.textAlign = 'center';
 
 const addWagerButton = document.createElement('button');
+addWagerButton.id = 'addWagerButton';
 addWagerButton.textContent = 'Add Custom Wager';
-addWagerButton.style.display = 'block';
-addWagerButton.style.margin = '5px auto 10px auto';
-addWagerButton.style.padding = '10px 15px';
-addWagerButton.style.backgroundColor = '#4CAF50';
-addWagerButton.style.color = 'white';
-addWagerButton.style.border = 'none';
-addWagerButton.style.borderRadius = '4px';
-addWagerButton.style.cursor = 'pointer';
-addWagerButton.style.fontFamily = 'Arial, sans-serif';
-addWagerButton.style.fontSize = '16px';
-addWagerButton.style.transition = 'background-color 0.3s ease';
+addWagerButton.classList.add('wager-button', 'add-wager-button');
 
 const hideWagerButton = document.createElement('button');
+hideWagerButton.id = 'hideWagerButton';
 hideWagerButton.textContent = 'Hide Wager';
+hideWagerButton.classList.add('wager-button', 'hide-wager-button');
 hideWagerButton.style.display = 'none';
-hideWagerButton.style.margin = '5px auto 10px auto';
-hideWagerButton.style.padding = '10px 15px';
-hideWagerButton.style.backgroundColor = '#ccc';
-hideWagerButton.style.color = 'black';
-hideWagerButton.style.border = 'none';
-hideWagerButton.style.borderRadius = '4px';
-hideWagerButton.style.cursor = 'pointer';
-hideWagerButton.style.fontFamily = 'Arial, sans-serif';
-hideWagerButton.style.fontSize = '16px';
-hideWagerButton.style.transition = 'background-color 0.3s ease';
 
 hideWagerButton.addEventListener('mouseover', () => {
-    hideWagerButton.style.backgroundColor = '#bbb';
+    hideWagerButton.classList.add('hover');
 });
 
 hideWagerButton.addEventListener('mouseout', () => {
-    hideWagerButton.style.backgroundColor = '#ccc';
+    hideWagerButton.classList.remove('hover');
 });
 
 addWagerButton.addEventListener('mouseover', () => {
-    addWagerButton.style.backgroundColor = '#45a049';
+    addWagerButton.classList.add('hover');
 });
 
 addWagerButton.addEventListener('mouseout', () => {
-    addWagerButton.style.backgroundColor = '#4CAF50';
+    addWagerButton.classList.remove('hover');
 });
 
 wagerContainer.appendChild(wagerLabel);
@@ -81,36 +57,22 @@ document.body.insertBefore(hideWagerButton, wagerContainer.nextSibling);
 
 let currentWager = null;
 
-// Total Stats Section - Fun Styling
+// Total Stats Section
 const totalStats = document.createElement('div');
 totalStats.id = 'totalStats';
-totalStats.style.position = 'sticky';
-totalStats.style.top = '0';
-totalStats.style.backgroundColor = '#f0f8ff';
-totalStats.style.padding = '20px';
-totalStats.style.borderBottom = '3px solid #add8e6';
-totalStats.style.zIndex = '100';
-totalStats.style.fontFamily = 'Arial, sans-serif';
-totalStats.style.fontSize = '18px';
-totalStats.style.color = '#2f4f4f';
-totalStats.style.borderRadius = '10px';
-totalStats.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-totalStats.style.display = 'flex';
-totalStats.style.justifyContent = 'space-around';
-totalStats.style.alignItems = 'center';
 
 totalStats.innerHTML = `
-    <div style="text-align: center;">
-        <span style="color: #008000; font-weight: bold;">Wins: <span id="totalWinsStat">0</span></span>
+    <div class="stat-item">
+        <span class="stat-label">Wins: <span id="totalWinsStat" class="wins">0</span></span>
     </div>
-    <div style="text-align: center;">
-        <span style="color: #ff0000; font-weight: bold;">Losses: <span id="totalLossesStat">0</span></span>
+    <div class="stat-item">
+        <span class="stat-label">Losses: <span id="totalLossesStat" class="losses">0</span></span>
     </div>
-    <div style="text-align: center;">
-        <span style="color: #ffa500; font-weight: bold;">Units: <span id="totalUnitsStat">0.00</span></span>
+    <div class="stat-item">
+        <span class="stat-label">Units: <span id="totalUnitsStat" class="units">0.00</span></span>
     </div>
-    <div style="text-align: center; display: none;" id="totalWinningsContainer">
-        <span style="color: #4682b4; font-weight: bold;">Winnings: <span id="totalWinningsStat">0.00</span></span>
+    <div class="stat-item" id="totalWinningsContainer" style="display: none;">
+        <span class="stat-label">Winnings: <span id="totalWinningsStat" class="winnings">0.00</span></span>
     </div>
 `;
 
@@ -139,11 +101,7 @@ function updateTotalStats(win, units, winnings) {
     document.getElementById('totalLossesStat').textContent = totalLosses;
     document.getElementById('totalUnitsStat').textContent = (totalUnits >= 0 ? '+' : '') + totalUnits.toFixed(2);
     document.getElementById('totalWinningsStat').textContent = (totalWinnings >= 0 ? '+' : '') + '$' + Math.abs(totalWinnings).toFixed(2);
-    if (currentWager !== null) {
-        document.getElementById('totalWinningsContainer').style.display = 'block';
-    } else {
-        document.getElementById('totalWinningsContainer').style.display = 'none';
-    }
+    document.getElementById('totalWinningsContainer').style.display = currentWager !== null ? 'block' : 'none';
 }
 
 function formatDate(gameDate) {
@@ -164,78 +122,92 @@ function calculateWinnings(odds, betAmount) {
 function renderGameCard(game) {
     const card = document.createElement('div');
     card.classList.add('game-card');
-    let cardStyle = '';
-    let textColor = 'white'; // Default text color
-
+    card.classList.add('scoreboard-card');
     if (game.betStatus === 'Win') {
-        cardStyle = 'background-color: #a8e0a8; border: 1px solid #7ac27a; color: black;';
-        textColor = 'black';
+        card.classList.add('win');
     } else if (game.betStatus === 'Loss') {
-        cardStyle = 'background-color: #e8a8a8; border: 1px solid #d08080; color: black;';
-        textColor = 'black';
+        card.classList.add('loss');
     } else if (!game.betStatus && game.gameDate > new Date().toISOString().slice(0, 10).replace(/-/g, '')) {
-        // Future game
-        cardStyle = 'background-color: #333; border: 1px solid #555;';
-        textColor = 'white';
-    } else {
-        cardStyle = 'border: 1px solid #ccc;';
+        card.classList.add('future');
+    }
+
+    let scoreDisplay = '';
+    if (game.score) {
+        const scores = game.score.split('-');
+        const awayScore = scores[0] ? scores[0].trim() : '-';
+        const homeScore = scores[1] ? scores[1].trim() : '-';
+        scoreDisplay = `<div class="score-display">
+                            <span class="away-score">${awayScore}</span> - <span class="home-score">${homeScore}</span>
+                        </div>`;
+    }
+
+    let betDetails = '';
+    if (game.odds) {
+        betDetails += `<p class="odds">Odds: ${game.odds}</p>`;
+        betDetails += `<p class="unit-winnings">1 Unit: ${calculateWinnings(game.odds, 1)} units</p>`;
+    }
+    if (game.betStatus) {
+        betDetails += `<p class="bet-status ${game.betStatus.toLowerCase()}">${game.betStatus}</p>`;
+        if (currentWager !== null) {
+            if (game.betStatus === 'Win' && game.odds) {
+                betDetails += `<p class="gain">Gain: $${calculateWinnings(game.odds, currentWager)}</p>`;
+            } else if (game.betStatus === 'Loss') {
+                betDetails += `<p class="loss">Loss: $${currentWager}</p>`;
+            }
+        }
     }
 
     card.innerHTML = `
-        <p style="color: ${textColor};"><strong>Date:</strong> ${formatDate(game.gameDate)}</p>
-        <p style="color: ${textColor};"><strong>Teams:</strong> ${game.away} @ ${game.home}</p>
-        ${game.score ? `<p style="color: ${textColor};"><strong>Score:</strong> ${game.score}</p>` : ''}
-        ${game.odds ? `<p style="color: ${textColor};"><strong>Odds:</strong> ${game.odds}</p>` : ''}
-        ${game.odds ? `<p style="color: ${textColor};"><strong>1 Unit Winnings:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
-        ${game.betStatus ? `<p style="color: ${textColor};"><strong>Bet Status:</strong> ${game.betStatus}</p>` : ''}
-        ${game.gameTime ? `<p style="color: ${textColor};"><strong>Time:</strong> ${game.gameTime}</p>` : ''}
+        <div class="game-info">
+            <p class="date">${formatDate(game.gameDate)}</p>
+            <p class="teams"><span class="away-team">${game.away}</span> @ <span class="home-team">${game.home}</span></p>
+            ${scoreDisplay}
+            ${game.gameTime ? `<p class="time">Time: ${game.gameTime}</p>` : ''}
+        </div>
+        <div class="bet-info">
+            ${betDetails}
+        </div>
     `;
-
-    card.setAttribute('style', cardStyle);
 
     return card;
 }
 
 function renderMainGame(game) {
     const listItem = document.createElement('li');
-    let cardStyle = '';
-    let textColor = 'white';
+    listItem.classList.add('scoreboard-main-card'); // Using the non-v2 class
+    if (game.betStatus === 'Win') {
+        listItem.classList.add('win');
+    } else if (game.betStatus === 'Loss') {
+        listItem.classList.add('loss');
+    } else if (!game.betStatus && game.gameDate > new Date().toISOString().slice(0, 10).replace(/-/g, '')) {
+        listItem.classList.add('future');
+    }
+
+    let scoreDisplay = '';
+    if (game.score) {
+        const scores = game.score.split('-');
+        const awayScore = scores[0] ? scores[0].trim() : '-';
+        const homeScore = scores[1] ? scores[1].trim() : '-';
+        scoreDisplay = `<div class="score-display">
+                            <span class="away-score">${awayScore}</span> - <span class="home-score">${homeScore}</span>
+                        </div>`;
+    }
 
     listItem.innerHTML = `
-        <p><strong>Game Date:</strong> ${formatDate(game.gameDate)}</p>
-        <p><strong>Teams:</strong> ${game.away} @ ${game.home}</p>
-        <p><strong>Game Time:</strong> ${game.gameTime}</p>
-        ${game.odds ? `<p><strong>Odds:</strong> ${game.odds}</p>` : ''}
-        ${game.odds ? `<p><strong>1 Unit Winnings:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
-        ${game.score ? `<p><strong>Score:</strong> ${game.score}</p>` : ''}
-        ${game.betStatus ? `<p><strong>Bet Status:</strong> ${game.betStatus}</p>` : ''}
+        <div class="game-info">
+            <p class="date"><strong>Date:</strong> ${formatDate(game.gameDate)}</p>
+            <p class="teams"><span class="away-team">${game.away}</span> @ <span class="home-team">${game.home}</span></p>
+            ${scoreDisplay}
+            <p class="time"><strong>Game Time:</strong> ${game.gameTime}</p>
+            ${game.odds ? `<p class="odds"><strong>Odds:</strong> ${game.odds}</p>` : ''}
+            ${game.odds ? `<p class="unit-winnings"><strong>1 Unit Wins:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
+            ${game.betStatus ? `<p class="bet-status ${game.betStatus.toLowerCase()}"><strong>Status:</strong> ${game.betStatus}</p>` : ''}
+            ${game.betStatus === 'Win' && game.odds && currentWager !== null ? `<p class="gain"><strong>Gain:</strong> $${calculateWinnings(game.odds, currentWager)}</p>` : ''}
+            ${game.betStatus === 'Loss' && game.odds && currentWager !== null ? `<p class="loss"><strong>Loss:</strong> $${currentWager}</p>` : ''}
+            ${currentWager !== null && game.odds && game.betStatus !== 'Win' && game.betStatus !== 'Loss' ? `<p class="potential"><strong>$${currentWager} Wins:</strong> $${calculateWinnings(game.odds, currentWager)}</p>` : ''}
+        </div>
     `;
 
-    if (game.betStatus === 'Win' && game.odds && currentWager !== null) {
-        listItem.innerHTML += `<p><strong>Gain:</strong> $${calculateWinnings(game.odds, currentWager)}</p>`;
-        cardStyle = 'background-color: #a8e0a8; border: 1px solid #7ac27a; color: black;';
-        textColor = 'black';
-    } else if (game.betStatus === 'Loss' && game.odds && currentWager !== null) {
-        listItem.innerHTML += `<p><strong>Loss:</strong> $${currentWager}</p>`;
-        cardStyle = 'background-color: #e8a8a8; border: 1px solid #d08080; color: black;';
-        textColor = 'black';
-    } else if (game.betStatus === 'Win' && game.odds && currentWager === null) {
-        cardStyle = 'background-color: #a8e0a8; border: 1px solid #7ac27a; color: black;';
-        textColor = 'black';
-    } else if (game.betStatus === 'Loss' && game.odds && currentWager === null) {
-        cardStyle = 'background-color: #e8a8a8; border: 1px solid #d08080; color: black;';
-        textColor = 'black';
-    }
-
-    if (currentWager !== null && game.odds && game.betStatus !== 'Win' && game.betStatus !== 'Loss') {
-        listItem.innerHTML += `
-            <p><strong>Wager:</strong> $${currentWager}</p>
-            <p><strong>Potential Winnings:</strong> $${calculateWinnings(game.odds, currentWager)}</p>
-        `;
-    }
-
-    listItem.setAttribute('style', cardStyle); // Apply the style here!
-    listItem.style.color = textColor; // Apply text color
     return listItem;
 }
 
@@ -263,9 +235,10 @@ function getFutureGames(startIndex, count) {
 
 function createDropdown(label, gamesFunction, id) {
     const dropdown = document.createElement('div');
+    dropdown.classList.add('dropdown-container');
     dropdown.innerHTML = `
         <button class="dropdown-button">${label}</button>
-        <div class="dropdown-list" id="${id}"></div>
+        <div class="dropdown-list" id="${id}" style="display: none;"></div>
         <button class="load-more" style="display:none;">Load More</button>
     `;
     document.body.appendChild(dropdown);
@@ -274,24 +247,28 @@ function createDropdown(label, gamesFunction, id) {
     const loadMoreButton = dropdown.querySelector('.load-more');
     let startIndex = 0;
     const count = 5;
+
     function loadGames() {
         const games = gamesFunction(startIndex, count);
-        games.forEach(game => list.appendChild(renderGameCard(game)));
+        games.forEach(game => list.appendChild(renderGameCard(game))); // Using the updated renderGameCard
         startIndex += count;
         loadMoreButton.style.display = games.length < count ? 'none' : 'block';
     }
+
     button.addEventListener('click', () => {
-        list.style.display = list.style.display === 'block' ? 'none' : 'block';
+        list.style.display = list.style.display === 'none' ? 'block' : 'none';
         if (list.style.display === 'block' && list.children.length === 0) loadGames();
         loadMoreButton.style.display = list.style.display === 'none' ? 'none' : 'block';
     });
+
     loadMoreButton.addEventListener('click', loadGames);
+
     list.addEventListener('click', (event) => {
         const card = event.target.closest('.game-card');
         if (card) {
             const index = Array.from(list.children).indexOf(card);
             gameList.innerHTML = '';
-            gameList.appendChild(renderMainGame(gamesFunction(0, Infinity)[index]));
+            gameList.appendChild(renderMainGame(gamesFunction(0, Infinity)[index])); // Using the updated renderMainGame
             list.style.display = 'none';
             loadMoreButton.style.display = 'none';
         }
