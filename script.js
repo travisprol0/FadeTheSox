@@ -174,7 +174,7 @@ function renderGameCard(game) {
 
 function renderMainGame(game) {
     const listItem = document.createElement('li');
-    listItem.classList.add('scoreboard-main-card'); // Using the non-v2 class
+    listItem.classList.add('scoreboard-main-card');
     if (game.betStatus === 'Win') {
         listItem.classList.add('win');
     } else if (game.betStatus === 'Loss') {
@@ -200,7 +200,7 @@ function renderMainGame(game) {
             ${scoreDisplay}
             <p class="time"><strong>Game Time:</strong> ${game.gameTime}</p>
             ${game.odds ? `<p class="odds"><strong>Odds:</strong> ${game.odds}</p>` : ''}
-            ${game.odds ? `<p class="unit-winnings"><strong>1 Unit Wins:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
+            ${game.odds ? `<p class="unit-winnings"><strong>1 Unit Winnings:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
             ${game.betStatus ? `<p class="bet-status ${game.betStatus.toLowerCase()}"><strong>Status:</strong> ${game.betStatus}</p>` : ''}
             ${game.betStatus === 'Win' && game.odds && currentWager !== null ? `<p class="gain"><strong>Gain:</strong> $${calculateWinnings(game.odds, currentWager)}</p>` : ''}
             ${game.betStatus === 'Loss' && game.odds && currentWager !== null ? `<p class="loss"><strong>Loss:</strong> $${currentWager}</p>` : ''}
@@ -250,7 +250,11 @@ function createDropdown(label, gamesFunction, id) {
 
     function loadGames() {
         const games = gamesFunction(startIndex, count);
-        games.forEach(game => list.appendChild(renderGameCard(game))); // Using the updated renderGameCard
+        games.forEach(game => {
+            const card = renderGameCard(game);
+            list.appendChild(card);
+            // ENSURING NO EVENT LISTENER IS ADDED HERE
+        });
         startIndex += count;
         loadMoreButton.style.display = games.length < count ? 'none' : 'block';
     }
@@ -263,16 +267,8 @@ function createDropdown(label, gamesFunction, id) {
 
     loadMoreButton.addEventListener('click', loadGames);
 
-    list.addEventListener('click', (event) => {
-        const card = event.target.closest('.game-card');
-        if (card) {
-            const index = Array.from(list.children).indexOf(card);
-            gameList.innerHTML = '';
-            gameList.appendChild(renderMainGame(gamesFunction(0, Infinity)[index])); // Using the updated renderMainGame
-            list.style.display = 'none';
-            loadMoreButton.style.display = 'none';
-        }
-    });
+    // ABSOLUTELY NO EVENT LISTENER FOR CLICK ON THE LIST OR ITS CHILDREN
+    // list.addEventListener('click', (event) => { ... });
 }
 
 function recalculateStats() {
@@ -293,7 +289,17 @@ document.addEventListener('DOMContentLoaded', () => {
     recalculateStats();
 
     const currentGame = findCurrentOrNextGame();
-    if (currentGame) gameList.appendChild(renderMainGame(currentGame));
+    if (currentGame) {
+        const mainGameElement = renderMainGame(currentGame);
+        gameList.appendChild(mainGameElement);
+        // OPTIONALLY REMOVE ANY CLICK LISTENERS FROM THE MAIN GAME ELEMENT IF ANY WERE ADDED ELSEWHERE
+        // gameList.removeEventListener('click', /* ... your listener ... */);
+        // If individual elements inside mainGameElement had listeners:
+        // const someElement = mainGameElement.querySelector('.some-class');
+        // if (someElement) {
+        //     someElement.removeEventListener('click', /* ... listener ... */);
+        // }
+    }
     createDropdown('Past Games', getPastGames, 'pastGamesList');
     createDropdown('Future Games', getFutureGames, 'futureGamesList');
 
