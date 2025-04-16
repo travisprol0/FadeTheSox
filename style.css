@@ -31,7 +31,12 @@ li p {
 }
 
 .dropdown-container {
-    /* Added for potential overall dropdown styling */
+    display: flex;
+    flex-direction: column; /* Stack button and list vertically */
+    align-items: center; /* Center horizontally */
+    width: 100%; /* Take full width of parent */
+    max-width: 300px; /* Match the max-width of other elements if needed */
+    margin: 10px auto; /* Auto margins on left and right will center it */
 }
 
 .dropdown-button {
@@ -40,19 +45,21 @@ li p {
     padding: 10px 15px;
     border: none;
     cursor: pointer;
-    margin: 10px 0;
-    width: 300px;
+    margin: 10px 0 auto; /* Added auto to right margin for centering */
+    width: 100%; /* Make button take full width of container */
+    max-width: 300px; /* Ensure it respects the container's max-width */
 }
 
 .dropdown-list {
     display: none;
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 0 auto; /* Added auto margins for centering */
     background-color: #1f1f1f;
     position: relative;
     z-index: 1;
-    width: 300px;
+    width: 100%; /* Make list take full width of container */
+    max-width: 300px; /* Ensure it respects the container's max-width */
     max-height: 300px; /* Limit height and add scroll */
     overflow-y: auto;
 }
@@ -155,8 +162,9 @@ li p {
     padding: 10px 15px;
     border: none;
     cursor: pointer;
-    width: 300px;
-    margin-top: 5px;
+    width: 100%; /* Make button take full width of container */
+    max-width: 300px; /* Ensure it respects the container's max-width */
+    margin: 5px auto; /* Added auto margins for centering */
 }
 
 .scoreboard-main-card {
