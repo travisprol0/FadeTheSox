@@ -209,10 +209,10 @@ function renderMainGame(game) {
             <p class="time"><strong>Game Time:</strong> ${game.gameTime}</p>
             ${game.odds ? `<p class="odds"><strong>Odds:</strong> ${game.odds}</p>` : ''}
             ${game.odds ? `<p class="unit-winnings"><strong>1 Unit Winnings:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
+            ${currentWager !== null && game.odds && game.betStatus !== 'Win' && game.betStatus !== 'Loss' ? `<p class="potential"><strong>$${currentWager} Wins:</strong> $${calculateWinnings(game.odds, currentWager)}</p>` : ''}
             ${game.betStatus === 'Win' && game.odds && currentWager !== null ? `<p class="gain"><strong>Gain:</strong> $${calculateWinnings(game.odds, currentWager)}</p>` : ''}
             ${game.betStatus === 'Loss' && game.odds && currentWager !== null ? `<p class="loss"><strong>Loss:</strong> $${currentWager}</p>` : ''}
             ${game.betStatus ? `<p class="bet-status ${game.betStatus.toLowerCase()}"><strong>Status:</strong> ${game.betStatus}</p>` : ''}
-            ${currentWager !== null && game.odds && game.betStatus !== 'Win' && game.betStatus !== 'Loss' ? `<p class="potential"><strong>$${currentWager} Wins:</strong> $${calculateWinnings(game.odds, currentWager)}</p>` : ''}
         </div>
     `;
 
