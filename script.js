@@ -137,30 +137,33 @@ function renderGameCard(game) {
         const awayScore = scores[0] ? scores[0].trim() : '-';
         const homeScore = scores[1] ? scores[1].trim() : '-';
         scoreDisplay = `<div class="score-display">
-                            <span class="away-score">${awayScore}</span> - <span class="home-score">${homeScore}</span>
-                        </div>`;
+                                    <span class="away-score">${awayScore}</span> - <span class="home-score">${homeScore}</span>
+                                </div>`;
     }
 
     let betDetails = '';
     if (game.odds) {
         betDetails += `<p class="odds">Odds: ${game.odds}</p>`;
         betDetails += `<p class="unit-winnings">1 Unit: ${calculateWinnings(game.odds, 1)} units</p>`;
+        if (currentWager !== null && game.betStatus === 'Win') {
+            betDetails += `<p class="gain">Gain: $${calculateWinnings(game.odds, currentWager)}</p>`;
+        } else if (currentWager !== null && game.betStatus === 'Loss') {
+            betDetails += `<p class="loss">Loss: $${currentWager}</p>`;
+        }
     }
     if (game.betStatus) {
         betDetails += `<p class="bet-status ${game.betStatus.toLowerCase()}">${game.betStatus}</p>`;
-        if (currentWager !== null) {
-            if (game.betStatus === 'Win' && game.odds) {
-                betDetails += `<p class="gain">Gain: $${calculateWinnings(game.odds, currentWager)}</p>`;
-            } else if (game.betStatus === 'Loss') {
-                betDetails += `<p class="loss">Loss: $${currentWager}</p>`;
-            }
-        }
     }
 
     card.innerHTML = `
         <div class="game-info">
             <p class="date">${formatDate(game.gameDate)}</p>
-            <p class="teams"><span class="away-team">${game.away}</span> @ <span class="home-team">${game.home}</span></p>
+            <p class="teams">
+                <img src="logos/${game.teamIDAway}.png" alt="${game.away} Logo" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 3px;">
+                <span class="away-team">${game.away}</span> @
+                <span class="home-team">${game.home}</span>
+                <img src="logos/${game.teamIDHome}.png" alt="${game.home} Logo" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 3px;">
+            </p>
             ${scoreDisplay}
             ${game.gameTime ? `<p class="time">Time: ${game.gameTime}</p>` : ''}
         </div>
@@ -189,21 +192,26 @@ function renderMainGame(game) {
         const awayScore = scores[0] ? scores[0].trim() : '-';
         const homeScore = scores[1] ? scores[1].trim() : '-';
         scoreDisplay = `<div class="score-display">
-                            <span class="away-score">${awayScore}</span> - <span class="home-score">${homeScore}</span>
-                        </div>`;
+                                    <span class="away-score">${awayScore}</span> - <span class="home-score">${homeScore}</span>
+                                </div>`;
     }
 
     listItem.innerHTML = `
         <div class="game-info">
             <p class="date"><strong>Date:</strong> ${formatDate(game.gameDate)}</p>
-            <p class="teams"><span class="away-team">${game.away}</span> @ <span class="home-team">${game.home}</span></p>
+            <p class="teams">
+                <img src="logos/${game.teamIDAway}.png" alt="${game.away} Logo" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 5px;">
+                <span class="away-team">${game.away}</span> @
+                <span class="home-team">${game.home}</span>
+                <img src="logos/${game.teamIDHome}.png" alt="${game.home} Logo" style="width: 24px; height: 24px; vertical-align: middle; margin-left: 5px;">
+            </p>
             ${scoreDisplay}
             <p class="time"><strong>Game Time:</strong> ${game.gameTime}</p>
             ${game.odds ? `<p class="odds"><strong>Odds:</strong> ${game.odds}</p>` : ''}
             ${game.odds ? `<p class="unit-winnings"><strong>1 Unit Winnings:</strong> ${calculateWinnings(game.odds, 1)} units</p>` : ''}
-            ${game.betStatus ? `<p class="bet-status ${game.betStatus.toLowerCase()}"><strong>Status:</strong> ${game.betStatus}</p>` : ''}
             ${game.betStatus === 'Win' && game.odds && currentWager !== null ? `<p class="gain"><strong>Gain:</strong> $${calculateWinnings(game.odds, currentWager)}</p>` : ''}
             ${game.betStatus === 'Loss' && game.odds && currentWager !== null ? `<p class="loss"><strong>Loss:</strong> $${currentWager}</p>` : ''}
+            ${game.betStatus ? `<p class="bet-status ${game.betStatus.toLowerCase()}"><strong>Status:</strong> ${game.betStatus}</p>` : ''}
             ${currentWager !== null && game.odds && game.betStatus !== 'Win' && game.betStatus !== 'Loss' ? `<p class="potential"><strong>$${currentWager} Wins:</strong> $${calculateWinnings(game.odds, currentWager)}</p>` : ''}
         </div>
     `;
