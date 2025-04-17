@@ -428,8 +428,8 @@ export const schedule = [
       "home": "CHW",
       "gameStatusCode": "0",
       "odds": "-160",
-      "score": "",
-      "betStatus": "Open"
+      "score": "8-0",
+      "betStatus": "Win"
    },
    {
       "gameID": "20250418_CHW@BOS",
