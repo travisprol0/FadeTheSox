@@ -475,9 +475,9 @@ export const schedule = [
       },
       "home": "BOS",
       "gameStatusCode": "0",
-      "odds": "",
+      "odds": "-325",
       "score": "",
-      "betStatus": ""
+      "betStatus": "Open"
    },
    {
       "gameID": "20250420_CHW@BOS",
