@@ -452,7 +452,7 @@ export const schedule = [
       "home": "BOS",
       "gameStatusCode": "0",
       "odds": "-200",
-      "score": "",
+      "score": "3-10",
       "betStatus": "Win"
    },
    {
