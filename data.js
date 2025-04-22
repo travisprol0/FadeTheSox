@@ -500,8 +500,8 @@ export const schedule = [
       "home": "BOS",
       "gameStatusCode": "0",
       "odds": "-275",
-      "score": "",
-      "betStatus": "Open"
+      "score": "8-4",
+      "betStatus": "Loss"
    },
    {
       "gameID": "20250421_CHW@BOS",
@@ -523,9 +523,9 @@ export const schedule = [
       },
       "home": "BOS",
       "gameStatusCode": "0",
-      "odds": "",
-      "score": "",
-      "betStatus": ""
+      "odds": "-275",
+      "score": "2-4",
+      "betStatus": "Win"
    },
    {
       "gameID": "20250422_CHW@MIN",
@@ -547,9 +547,9 @@ export const schedule = [
       },
       "home": "MIN",
       "gameStatusCode": "0",
-      "odds": "",
+      "odds": "-250",
       "score": "",
-      "betStatus": ""
+      "betStatus": "Open"
    },
    {
       "gameID": "20250423_CHW@MIN",
