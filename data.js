@@ -571,9 +571,9 @@ export const schedule = [
       },
       "home": "MIN",
       "gameStatusCode": "0",
-      "odds": "",
+      "odds": "-275",
       "score": "",
-      "betStatus": ""
+      "betStatus": "Open"
    },
    {
       "gameID": "20250424_CHW@MIN",
