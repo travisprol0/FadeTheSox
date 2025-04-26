@@ -596,8 +596,8 @@ export const schedule = [
       "home": "MIN",
       "gameStatusCode": "0",
       "odds": "-230",
-      "score": "",
-      "betStatus": "Open"
+      "score": "3-0",
+      "betStatus": "Loss"
    },
    {
       "gameID": "20250425_CHW@OAK",
@@ -619,9 +619,9 @@ export const schedule = [
       },
       "home": "OAK",
       "gameStatusCode": "0",
-      "odds": "",
+      "odds": "-240",
       "score": "",
-      "betStatus": ""
+      "betStatus": "Open"
    },
    {
       "gameID": "20250426_CHW@OAK",
