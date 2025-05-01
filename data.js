@@ -668,8 +668,8 @@ export const schedule = [
       "home": "OAK",
       "gameStatusCode": "0",
       "odds": "-225",
-      "score": "",
-      "betStatus": "Open"
+      "score": "2-3",
+      "betStatus": "Win"
    },
    {
       "gameID": "20250429_MIL@CHW",
@@ -691,9 +691,9 @@ export const schedule = [
       },
       "home": "CHW",
       "gameStatusCode": "0",
-      "odds": "",
-      "score": "",
-      "betStatus": ""
+      "odds": "-250",
+      "score": "7-2",
+      "betStatus": "Win"
    },
    {
       "gameID": "20250430_MIL@CHW",
@@ -715,9 +715,9 @@ export const schedule = [
       },
       "home": "CHW",
       "gameStatusCode": "0",
-      "odds": "",
-      "score": "",
-      "betStatus": ""
+      "odds": "-160",
+      "score": "6-4",
+      "betStatus": "Win"
    },
    {
       "gameID": "20250501_MIL@CHW",
@@ -739,9 +739,9 @@ export const schedule = [
       },
       "home": "CHW",
       "gameStatusCode": "0",
-      "odds": "",
+      "odds": "-180",
       "score": "",
-      "betStatus": ""
+      "betStatus": "Open"
    },
    {
       "gameID": "20250502_HOU@CHW",
