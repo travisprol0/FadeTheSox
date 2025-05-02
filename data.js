@@ -740,8 +740,8 @@ export const schedule = [
       "home": "CHW",
       "gameStatusCode": "0",
       "odds": "-180",
-      "score": "",
-      "betStatus": "Open"
+      "score": "0-8",
+      "betStatus": "Loss"
    },
    {
       "gameID": "20250502_HOU@CHW",
@@ -763,9 +763,9 @@ export const schedule = [
       },
       "home": "CHW",
       "gameStatusCode": "0",
-      "odds": "",
+      "odds": "-250",
       "score": "",
-      "betStatus": ""
+      "betStatus": "Open"
    },
    {
       "gameID": "20250503_HOU@CHW",
